@@ -1,0 +1,38 @@
+name: Build Paradox Command Center
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    env:
+      ELECTRON_BUILDER_BINARIES_MIRROR: https://repo.huaweicloud.com/electron-builder-binaries/
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Windows installer and portable EXE
+        run: npm run dist:win
+
+      - name: Upload Windows EXE files
+        uses: actions/upload-artifact@v4
+        with:
+          name: Paradox-Command-Center-Windows
+          path: release/*
+          if-no-files-found: error
