@@ -1,0 +1,38 @@
+PARADOX COMMAND CENTER CONNECTOR 1.0.0
+WORDPRESS INSTALLATION
+
+BEFORE INSTALLING
+1. Create a complete WPvivid backup of website files and database.
+2. Confirm you can still access normal WordPress Admin.
+3. Keep your current theme/plugin ZIPs and hosting access available.
+
+INSTALL
+1. WordPress Admin > Plugins > Add New Plugin > Upload Plugin.
+2. Choose Paradox-Command-Center-Connector-1.0.0.zip.
+3. Install and activate it.
+4. Confirm the plugin appears in the Installed Plugins list.
+5. No public-facing page or front-end design changes are made by this connector.
+
+CREATE AN APPLICATION PASSWORD
+1. WordPress Admin > Users > Profile (the administrator account intended for Command Center).
+2. Scroll to Application Passwords.
+3. Enter the name: Paradox Command Center.
+4. Click Add New Application Password and copy it immediately.
+5. Use the username and Application Password in the Windows desktop application.
+6. Do not paste this password into chat, screenshots, email or public code.
+
+TEST
+1. Connect from the app using the exact HTTPS URL of the WordPress site.
+2. Confirm the site name, WordPress version and PHP version appear.
+3. View Plugins and Themes.
+4. Test only with a non-critical inactive plugin/theme on a staging site first.
+5. Review the app Activity Log and WordPress PHP error log.
+
+ROLLBACK
+1. If access problems occur, use WordPress Admin > Plugins and deactivate Paradox Command Center Connector.
+2. If WordPress Admin is unavailable, use cPanel File Manager to rename the folder `paradox-command-center-connector` inside `wp-content/plugins/` by appending `.disabled`.
+3. Remove the connector only after confirming the desktop app is disconnected.
+4. Revoke the dedicated Application Password in Users > Profile > Application Passwords.
+5. Restore the WPvivid backup only if site files/database need to be rolled back.
+
+The connector does not create public pages, alter the theme, or alter member data.

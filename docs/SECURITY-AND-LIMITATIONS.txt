@@ -1,0 +1,34 @@
+PARADOX COMMAND CENTER 1.0.0
+SECURITY AND LIMITATIONS
+
+AUTHENTICATION
+- WordPress Application Password over HTTPS Basic Authentication.
+- Connector routes require an authenticated administrator with manage_options.
+- Each modifying route checks the relevant WordPress capability (install_plugins, activate_plugins, update_plugins, delete_plugins, install_themes, switch_themes, update_themes, delete_themes).
+- HTTPS is mandatory; the app rejects HTTP URLs and redirects.
+- Credentials are encrypted with Electron safeStorage on the Windows device.
+
+APP SECURITY DESIGN
+- contextIsolation enabled.
+- Node integration disabled in renderer.
+- sandbox enabled.
+- preload exposes a fixed IPC allowlist only.
+- Renderer has restrictive CSP and no network access.
+- External windows/navigation are denied.
+- API redirects are rejected.
+- ZIP uploads are restricted by extension and file-size limit in desktop app and server connector; the WordPress upgrader performs the actual install.
+- No arbitrary path/file, shell, SQL, PHP execution, or command execution API is provided.
+
+LIMITATIONS
+- The desktop app must be running and the computer must have internet access for live status/reconnection. It does not maintain a connection when closed.
+- Windows build and real Windows behavior were not tested in this Linux environment. The installer must be built and smoke-tested on Windows.
+- Live connection to the actual WordPress site has not been attempted.
+- PHP ZIP support and the WordPress filesystem/upgrader permissions are required for uploads and updates.
+- WordPress update transients determine whether an update button appears; check updates in WordPress Admin if the list is stale.
+- Multisite network-active plugins must be managed in Network Admin, not from this single-site manager.
+- Theme switch changes the public website immediately. Deletion of active theme/parent theme is blocked.
+- Plugin uninstall routines are not run. Plugin tables/options may remain after the plugin files are deleted.
+- No guarantee of error-free operation or compatibility with every third-party plugin/hosting configuration.
+
+RECOMMENDED FIRST TEST
+Use a staging copy of the site and a non-critical inactive plugin/theme. Verify upload, activation, deactivation, update and delete behavior before allowing production changes.

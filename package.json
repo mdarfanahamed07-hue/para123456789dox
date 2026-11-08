@@ -1,0 +1,56 @@
+{
+  "name": "paradox-command-center",
+  "version": "1.0.0",
+  "description": "Secure Windows desktop control panel for a Paradox Prime WordPress site.",
+  "main": "desktop/main.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis portable --x64",
+    "dist:win:dir": "electron-builder --win dir --x64"
+  },
+  "devDependencies": {
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "online.paradoxprime.commandcenter",
+    "productName": "Paradox Command Center",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Paradox-Command-Center-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Paradox Command Center"
+    },
+    "portable": {
+      "artifactName": "Paradox-Command-Center-${version}-Portable-${arch}.${ext}"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paradox Command Center</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <div><div class="brand-name">PARADOX</div><div class="brand-sub">COMMAND CENTER</div></div>
+      </div>
+      <div class="connection-mini"><span class="pulse" id="sidebarPulse"></span><div><b id="sidebarConnection">Not connected</b><small id="sidebarSite">Connect your WordPress site</small></div></div>
+      <nav class="nav">
+        <div class="nav-label">WORKSPACE</div>
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">◈</span>Overview</button>
+        <button class="nav-item" data-view="plugins"><span class="nav-icon">▣</span>Plugin manager</button>
+        <button class="nav-item" data-view="themes"><span class="nav-icon">◩</span>Theme manager</button>
+        <button class="nav-item" data-view="activity"><span class="nav-icon">≋</span>Activity log</button>
+        <div class="nav-label nav-label-lower">CONNECTION</div>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Connection settings</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="secure-note"><span>◆</span><div><b>Protected connection</b><small>HTTPS · encrypted credential storage</small></div></div><div class="version-label">PARADOX COMMAND CENTER <span id="appVersion">1.0.0</span></div></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div><div class="eyebrow">PARADOX PRIME / CONTROL SYSTEM</div><h1 id="pageTitle">Overview</h1></div>
+        <div class="top-actions"><div class="top-connection"><span class="status-dot" id="topDot"></span><span id="topStatus">Offline</span></div><button class="icon-button" id="openAdminBtn" title="Open WordPress admin" disabled>↗</button><button class="avatar" title="Administrator">A</button></div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-row"><div><h2>Your website, one control room.</h2><p>Monitor and manage your connected WordPress installation.</p></div><button class="button button-primary" id="connectQuick">＋ Connect website</button></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-top"><span>WEBSITE STATUS</span><span class="metric-icon">◉</span></div><div class="metric-value" id="metricStatus">Offline</div><div class="metric-foot" id="metricSite">No website connected</div></article>
+          <article class="metric-card"><div class="metric-top"><span>WORDPRESS VERSION</span><span class="metric-icon">⌘</span></div><div class="metric-value" id="metricWp">—</div><div class="metric-foot">Core installation</div></article>
+          <article class="metric-card"><div class="metric-top"><span>ACTIVE PLUGINS</span><span class="metric-icon">▣</span></div><div class="metric-value" id="metricPlugins">—</div><div class="metric-foot">Currently enabled</div></article>
+          <article class="metric-card"><div class="metric-top"><span>ACTIVE THEME</span><span class="metric-icon">◩</span></div><div class="metric-value metric-theme" id="metricTheme">—</div><div class="metric-foot">Current appearance</div></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel system-panel"><div class="panel-heading"><div><h3>System information</h3><p>Live details from your WordPress server</p></div><span class="live-tag"><i></i> LIVE</span></div><div class="system-list" id="systemInfo"><div class="empty-state compact"><span class="empty-icon">⌁</span><b>No site connected</b><small>Connect WordPress to load server information.</small></div></div></article>
+          <article class="panel quick-panel"><div class="panel-heading"><div><h3>Quick actions</h3><p>Common administration tasks</p></div></div><div class="quick-actions"><button class="quick-action" data-go="plugins"><span class="quick-icon">▣</span><span><b>Manage plugins</b><small>Install, update and control</small></span><span class="chevron">›</span></button><button class="quick-action" data-go="themes"><span class="quick-icon">◩</span><span><b>Manage themes</b><small>Install and switch designs</small></span><span class="chevron">›</span></button><button class="quick-action" data-go="activity"><span class="quick-icon">≋</span><span><b>Review activity</b><small>See recent admin actions</small></span><span class="chevron">›</span></button></div></article>
+        </div>
+        <div class="panel safety-panel"><div class="safety-symbol">盾</div><div><b>Safety comes first</b><p>Plugin and theme changes affect your live website. Take a full backup before updates or removals. New uploads are installed inactive; you choose when to activate them.</p></div></div>
+      </section>
+
+      <section class="view" id="view-plugins">
+        <div class="section-toolbar"><div><h2>Plugin manager</h2><p>Install and control WordPress plugins on your connected site.</p></div><button class="button button-primary" id="installPluginBtn">＋ Upload plugin ZIP</button></div>
+        <div class="filter-row"><div class="search-box"><span>⌕</span><input id="pluginSearch" type="search" placeholder="Search plugins…"></div><select id="pluginFilter"><option value="all">All plugins</option><option value="active">Active</option><option value="inactive">Inactive</option><option value="updates">Updates available</option></select><button class="button button-secondary" id="refreshPlugins">↻ Refresh</button></div>
+        <div class="list-summary" id="pluginSummary">Connect to load plugins.</div><div class="item-list" id="pluginList"><div class="empty-state"><span class="empty-icon">▣</span><b>Plugin list unavailable</b><small>Connect your WordPress website to continue.</small></div></div>
+      </section>
+
+      <section class="view" id="view-themes">
+        <div class="section-toolbar"><div><h2>Theme manager</h2><p>Install themes and control the appearance of your website.</p></div><button class="button button-primary" id="installThemeBtn">＋ Upload theme ZIP</button></div>
+        <div class="filter-row"><div class="search-box"><span>⌕</span><input id="themeSearch" type="search" placeholder="Search themes…"></div><select id="themeFilter"><option value="all">All themes</option><option value="active">Active</option><option value="updates">Updates available</option></select><button class="button button-secondary" id="refreshThemes">↻ Refresh</button></div>
+        <div class="list-summary" id="themeSummary">Connect to load themes.</div><div class="item-list" id="themeList"><div class="empty-state"><span class="empty-icon">◩</span><b>Theme list unavailable</b><small>Connect your WordPress website to continue.</small></div></div>
+      </section>
+
+      <section class="view" id="view-activity">
+        <div class="section-toolbar"><div><h2>Activity log</h2><p>Recent actions performed through Paradox Command Center.</p></div><button class="button button-secondary" id="refreshActivity">↻ Refresh</button></div>
+        <div class="notice notice-neutral">The connector retains up to 200 recent actions. This is not a complete WordPress or hosting access log.</div>
+        <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>DATE (UTC)</th><th>ADMIN</th><th>ACTION</th><th>TARGET</th><th>RESULT</th></tr></thead><tbody id="activityRows"><tr><td colspan="5" class="table-empty">Connect your website to load its activity log.</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="section-toolbar"><div><h2>Connection settings</h2><p>Securely link this desktop app to your WordPress website.</p></div></div>
+        <div class="settings-layout"><article class="panel settings-panel"><div class="panel-heading"><div><h3>WordPress connection</h3><p>Use a dedicated administrator account where possible.</p></div><span class="live-tag"><i></i> HTTPS ONLY</span></div><form id="connectForm"><label>Website URL<input id="siteUrl" type="url" placeholder="https://paradox-prime.online" autocomplete="url" required></label><label>WordPress username<input id="wpUsername" type="text" placeholder="Your WordPress username" autocomplete="username" required></label><label>Application Password<input id="wpPassword" type="password" placeholder="Paste a WordPress Application Password" autocomplete="new-password" required></label><div class="form-help">Create an Application Password in WordPress → Users → Profile → Application Passwords. It is separate from your normal login password.</div><div class="form-actions"><button class="button button-primary" type="submit" id="saveConnection">Connect securely</button><button class="button button-danger-outline" id="disconnectBtn" type="button">Disconnect</button></div><div class="inline-message" id="connectMessage" role="status"></div></form></article><article class="panel security-panel"><div class="security-large">◆</div><h3>Credential protection</h3><ul><li>Credentials are encrypted using the operating system's secure storage.</li><li>The desktop renderer never receives your Application Password.</li><li>All website requests require HTTPS.</li><li>The WordPress connector checks the signed-in user's capabilities on every action.</li><li>No public cloud relay is used by this app.</li></ul><div class="notice notice-warning">Anyone who can unlock your Windows account may be able to use its saved connection. Lock your PC when away and disconnect on shared computers.</div></article></div>
+      </section>
+
+      <footer class="footer"><span>PARADOX PRIME · INDEPENDENT COMMUNITY PROJECT</span><span>COMMAND CENTER v<span id="footerVersion">1.0.0</span></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>

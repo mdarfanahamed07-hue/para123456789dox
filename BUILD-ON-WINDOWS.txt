@@ -1,0 +1,16 @@
+BUILD PARADOX COMMAND CENTER ON WINDOWS 10/11 (64-BIT)
+
+1. Extract the Paradox-Command-Center-1.0.0-Source.zip to a writable folder.
+2. Install Node.js 22 or newer. Open a new Command Prompt after installation.
+3. Open the extracted folder.
+4. Double-click scripts\build-windows.bat.
+5. Wait for npm dependencies and Electron packaging to finish. Internet access is required to download the pinned build dependencies and Electron runtime.
+6. Find the installer and portable EXE in the release folder.
+
+If you only want the unpacked Windows app directory for troubleshooting, open Command Prompt in the project folder and run:
+  npm install
+  npm run dist:win:dir
+
+The unpacked application folder is created under release\win-unpacked. Run `Paradox Command Center.exe` from that folder.
+
+This initial app is unsigned. SmartScreen may display a warning because there is no publisher certificate. Do not bypass warnings for binaries obtained from unknown sources. Only run a build you created from this source archive.

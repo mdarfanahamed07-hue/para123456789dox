@@ -1,0 +1,33 @@
+PARADOX COMMAND CENTER 1.0.0 — QA REPORT
+Date: 8 November 2026
+
+SOURCE CHECKS
+- PHP syntax lint: PASS (connector PHP file).
+- JavaScript syntax: PASS (main process, preload bridge, renderer).
+- CSS parser: PASS (zero parser errors).
+- Static security/feature assertions: PASS (16/16).
+- WordPress connector ZIP integrity: PASS.
+
+STATIC ASSERTIONS COVERED
+- HTTPS-only website URL enforcement.
+- Encrypted safeStorage credential persistence.
+- Application Password is not exposed in the renderer API.
+- Electron context isolation, disabled Node integration, and sandbox enabled.
+- Fetch redirects rejected.
+- Renderer Content Security Policy blocks network connections.
+- Preload exposes a fixed IPC allowlist without shell/exec functionality.
+- WordPress administrator access check and per-action plugin/theme capabilities.
+- Activity log bounded to 200 rows.
+- Uploaded plugins/themes are not auto-activated.
+- Active plugin/theme deletion guards.
+
+NOT TESTED
+- No Windows EXE has been built in this Linux environment. The Windows packaging script is included for execution on Windows 10/11 x64.
+- No live WordPress or staging site was connected.
+- No real plugin/theme uploads, updates, activations or deletions were executed.
+- No Windows credential manager/DPAPI runtime test or code-signing test was performed.
+- No third-party plugin compatibility or server filesystem permission test was performed.
+- No independent security audit or penetration test was performed.
+
+RELEASE STATUS
+This is a source-complete first starter and connector, not a verified production desktop release. Build and test the Windows application on a Windows machine, then test the connector on a staging copy of the website before using it on production.

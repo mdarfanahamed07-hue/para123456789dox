@@ -1,0 +1,24 @@
+PARADOX COMMAND CENTER 1.0.0
+FIRST WINDOWS DESKTOP STARTER
+
+INCLUDED
+- Electron Windows x64 desktop app source with dark violet Paradox Prime interface.
+- HTTPS-only WordPress connection using Application Passwords.
+- Encrypted credential persistence through Electron safeStorage.
+- Live site status and periodic 30-second connection checks/reconnection while the desktop app is open.
+- Plugin list, ZIP install, activate, deactivate, update and delete.
+- Theme list, ZIP install, activate, update and delete.
+- Connector-side WordPress capability checks and bounded action history (200 entries).
+- New uploads install inactive; destructive operations require confirmation in the app.
+
+NOT INCLUDED
+- Public site/theme redesign.
+- Unrestricted file browser, arbitrary SQL/database console, remote shell or PHP execution.
+- cPanel access, full-site backup/restore or user/password administration.
+- Discord bot control.
+
+BUILD STATUS
+Source project and WordPress connector are packaged. A Windows EXE was not compiled in this environment because it is Linux and has no Windows packaging toolchain/Wine. Run scripts/build-windows.bat on Windows 10/11 x64 to build installer and portable EXE. This initial build is unsigned; SmartScreen may warn.
+
+VALIDATION
+Offline syntax checks and ZIP integrity checks are performed where available. No live WordPress site, Windows device, production hosting, or third-party plugin was used for end-to-end tests.
