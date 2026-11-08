@@ -1,0 +1,50 @@
+name: Build Paradox Command Center
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Windows installer and portable EXE (retry temporary download failures)
+        shell: pwsh
+        run: |
+          $maxAttempts = 3
+          for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+            Write-Host "Build attempt $attempt of $maxAttempts"
+            npm run dist:win
+            if ($LASTEXITCODE -eq 0) {
+              exit 0
+            }
+            if ($attempt -lt $maxAttempts) {
+              Write-Host "Build failed. Waiting 20 seconds before retrying..."
+              Start-Sleep -Seconds 20
+            }
+          }
+          throw "Windows packaging failed after $maxAttempts attempts."
+
+      - name: Upload Windows EXE files
+        uses: actions/upload-artifact@v4
+        with:
+          name: Paradox-Command-Center-Windows
+          path: release/*
+          if-no-files-found: error
